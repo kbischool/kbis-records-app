@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://cdn.jsdelivr.net 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://www.gstatic.com https://cdn.jsdelivr.net; worker-src 'self' blob:; base-uri 'self'; object-src 'none'">
+<meta name="robots" content="noindex, nofollow">
+<title>Upload spreadsheets · KBIS Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<main class="gate"><div class="gate-card" style="max-width:560px;text-align:left">
+  <h1>Upload spreadsheets</h1>
+  <p class="sub">Choose all your Excel files at once: every <b>FEE</b> workbook, <b>INVOICE.xlsx</b> and <b>STOCKS.xlsx</b>. They are read inside your browser and never sent to GitHub.</p>
+  <p id="who" role="status">Checking your access…</p>
+  <input class="input" id="files" type="file" accept=".xlsx" multiple disabled>
+  <button class="btn btn-primary btn-block" id="go" style="margin-top:12px" disabled>Update records</button>
+  <pre id="log" role="log" style="white-space:pre-wrap;font-size:12.5px;margin-top:12px"></pre>
+  <a class="btn btn-outline btn-block" href="index.html" style="margin-top:8px">Back to records</a>
+</div></main>
+<script src="js/firebase-config.js"></script>
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/upload.js"></script>
+</body>
+</html>

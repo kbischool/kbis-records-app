@@ -1,0 +1,41 @@
+/* KBIS Records theme layer. Loaded after styles.css, so changing a value here restyles the whole app.
+   Direction: a quiet, trustworthy school ledger. Warm paper, deep ink-navy, one gold accent,
+   serif headings and tabular figures for money. */
+:root{
+  --sky:#1B6FB5; --sky-deep:#0F4C81; --sky-pale:#E6EEF7; --sky-mist:#F1F5FA;
+  --navy:#0E1B33; --navy-soft:#3F4D6B; --amber:#C98A1B;
+  --paper:#FFFFFF; --cream:#F6F5F1;
+  --ink:#0E1B33; --ink-soft:#44506B; --ink-faint:#66728C;
+  --line:#E2E0D8; --line-soft:#EEEDE6;
+  --ok:#13795B; --ok-bg:#E4F4EE; --warn:#8F5A00; --warn-bg:#FBF0DA; --danger:#B3261E; --danger-bg:#FBE9E7;
+  --shadow-sm:0 1px 2px rgba(14,27,51,.06); --shadow-md:0 6px 18px rgba(14,27,51,.08); --shadow-lg:0 14px 36px rgba(14,27,51,.14);
+  --radius-xl:20px; --radius-lg:16px; --radius-md:12px; --radius-sm:8px;
+  --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --topbar-bg:rgba(246,245,241,.86);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --sky:#6FB1EA; --sky-deep:#8CC3F2; --sky-pale:#16294A; --sky-mist:#101D36;
+    --navy:#EEF2F9; --navy-soft:#B7C2D8; --amber:#E3A83A;
+    --paper:#111E36; --cream:#0B1426; --ink:#EEF2F9; --ink-soft:#B7C2D8; --ink-faint:#93A0BA;
+    --line:#22314F; --line-soft:#1A2843;
+    --ok:#4FD1A3; --ok-bg:#0F2F28; --warn:#F0B95A; --warn-bg:#33270F; --danger:#FF8A80; --danger-bg:#3A1816;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow-md:0 6px 18px rgba(0,0,0,.4); --shadow-lg:0 14px 36px rgba(0,0,0,.5);
+    --topbar-bg:rgba(11,20,38,.86);
+    color-scheme:dark;
+  }
+  img[src$="logo.png"]{ background:#fff; border-radius:12px; padding:4px; }
+}
+html{ scroll-behavior:smooth; scrollbar-color:var(--line) transparent; }
+body{ font-size:15px; line-height:1.55; }
+h1,h2,h3,h4{ font-weight:700; letter-spacing:-.015em; line-height:1.15; }
+.topbar{ background:var(--topbar-bg); }
+.topbar__title b{ font-family:var(--font-display); }
+.mono, .naira{ font-variant-numeric:tabular-nums; }
+::selection{ background:var(--sky-pale); color:var(--ink); }
+:focus-visible{ outline:3px solid var(--sky); outline-offset:2px; border-radius:4px; }
+.skip-link{ position:absolute; left:12px; top:-60px; z-index:100; padding:10px 14px; background:var(--paper); color:var(--ink);
+  border:2px solid var(--sky); border-radius:var(--radius-sm); font-weight:700; transition:top .15s ease; }
+.skip-link:focus{ top:12px; }
+.btn, .chip, button, a.btn{ min-height:44px; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
