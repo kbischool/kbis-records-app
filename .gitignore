@@ -1,0 +1,6 @@
+# Private school data must never be committed (it lives in Firebase, not GitHub)
+source/
+docs/data/
+*.xlsx
+*.xls
+docs/js/firebase-config.js
