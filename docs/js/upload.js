@@ -27,7 +27,8 @@ $('go').addEventListener('click', async () => {
   try {
     log('Preparing the spreadsheet reader (first time takes about a minute)…');
     const py = await loadPyodideOnce();
-    await py.loadPackage(['pandas', 'openpyxl']);
+    await py.loadPackage(['pandas', 'micropip']);
+    await py.pyimport('micropip').install('openpyxl');
     py.setStdout({ batched: (t) => log(t) });
     py.FS.mkdirTree('/app/source'); py.FS.mkdirTree('/app/docs/data');
     for (const f of files) py.FS.writeFile('/app/source/' + f.name, new Uint8Array(await f.arrayBuffer()));
