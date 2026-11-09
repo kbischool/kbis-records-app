@@ -54,7 +54,7 @@ jobs:
       - name: Check installable-app files
         run: python3 .github/scripts/check_pwa.py _site
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
   deploy:
