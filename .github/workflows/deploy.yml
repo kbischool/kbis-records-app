@@ -17,9 +17,20 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check required secrets
         env:
-          K: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
         run: |
-          if [ -z "$K" ]; then echo "::warning::FIREBASE_API_KEY secret is missing. Login will show 'not set up'. See docs/guides/FIREBASE_LOGIN_SETUP.md"; fi
+          missing=""
+          for n in FIREBASE_API_KEY FIREBASE_AUTH_DOMAIN FIREBASE_PROJECT_ID FIREBASE_APP_ID FIREBASE_MESSAGING_SENDER_ID; do
+            if [ -z "${!n}" ]; then missing="$missing $n"; fi
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secrets:$missing. Add them in Settings > Secrets and variables > Actions. See docs/guides/FIREBASE_LOGIN_SETUP.md"
+            exit 1
+          fi
       - name: Create site folder with Firebase settings
         env:
           API_KEY: ${{ secrets.FIREBASE_API_KEY }}
@@ -40,6 +51,8 @@ jobs:
       - name: Block accidental private data
         run: |
           if find _site -name '*.xlsx' -o -path '_site/data/*' | grep -q .; then echo "::error::Private data found in site folder"; exit 1; fi
+      - name: Check installable-app files
+        run: python3 .github/scripts/check_pwa.py _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
