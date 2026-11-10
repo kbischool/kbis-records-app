@@ -2,9 +2,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // True when someone is logged in.
+    // True when someone is logged in AND has proved they own their email address.
+    // (Anyone can create a Firebase account with any email, so an unverified
+    // email must never be trusted.)
     function signedIn() {
-      return request.auth != null && request.auth.token.email != null;
+      return request.auth != null
+        && request.auth.token.email != null
+        && request.auth.token.email_verified == true;
     }
     // Staff = logged in AND their email has a document in the "staff" collection.
     function staffPath() {

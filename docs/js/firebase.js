@@ -19,6 +19,20 @@ async function start() {
 
   A.onAuthStateChanged(auth, async (user) => {
     if (!user) { FB.user = null; FB.isAdmin = false; watchers.forEach((w) => w(null)); return; }
+
+    // Step 1: the email address must be verified (proves the person owns it).
+    if (!user.emailVerified) {
+      const email = user.email || 'your email address';
+      let sent = true;
+      try { await A.sendEmailVerification(user); } catch (e) { sent = false; }
+      await A.signOut(auth);
+      watchers.forEach((w) => w(null, sent
+        ? `Please confirm your email first. We sent a link to ${email}. Open it, then sign in again. Check your spam folder if you cannot find it.`
+        : `Your email ${email} is not confirmed yet. A link was already sent recently. Open it, or wait a few minutes and try again.`));
+      return;
+    }
+
+    // Step 2: the verified email must be on the staff list.
     try {
       const snap = await F.getDoc(F.doc(db, 'staff', user.email.toLowerCase()));
       if (!snap.exists()) throw new Error('no-staff');

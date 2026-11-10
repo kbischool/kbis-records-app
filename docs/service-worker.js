@@ -3,7 +3,7 @@
    offline fallback. A new version waits until the user taps "Refresh" in the app,
    so nobody is switched to new code in the middle of their work.
    Bump CACHE_VERSION whenever you change any file in APP_SHELL. */
-const CACHE_VERSION = 'kbis-v8';
+const CACHE_VERSION = 'kbis-v9';
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 
 const APP_SHELL = [
@@ -17,6 +17,7 @@ const APP_SHELL = [
   './js/config.js',
   './js/firebase.js',
   './js/app.js',
+  './js/a11y.js',
   './js/pwa.js',
   './img/logo.png',
   './icons/icon-192.png',
